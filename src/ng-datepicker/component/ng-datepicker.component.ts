@@ -10,6 +10,8 @@ import {
   getDate,
   getMonth,
   getYear,
+  getHours,
+  getMinutes,
   isToday,
   isSameDay,
   isSameMonth,
@@ -17,9 +19,13 @@ import {
   format,
   getDay,
   subDays,
-  setDay
+  setDay,
+  setHours,
+  setMinutes
 } from 'date-fns';
 import { ISlimScrollOptions } from 'ngx-slimscroll';
+
+import { AppTimePipe } from '../pipes/time.pipe';
 
 export type AddClass = string | string[] | { [k: string]: boolean } | null;
 
@@ -36,6 +42,7 @@ export interface DatepickerOptions {
   maxDate?: Date;
   /** Placeholder for the input field */
   placeholder?: string;
+  timePlaceholder?: string;
   /** [ngClass] to add to the input field */
   addClass?: AddClass;
   /** [ngStyle] to add to the input field */
@@ -44,6 +51,11 @@ export interface DatepickerOptions {
   fieldId?: string;
   /** If false, barTitleIfEmpty will be disregarded and a date will always be shown. Default: true */
   useEmptyBarTitle?: boolean;
+}
+
+export interface AppTime {
+  hours: string | number;
+  minutes: string | number;
 }
 
 // Counter for calculating the auto-incrementing field ID
@@ -89,6 +101,9 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
   displayValue: string;
   displayFormat: string;
   date: Date;
+  time: string;
+  timeParsed: AppTime;
+  timePattern: RegExp;
   barTitle: string;
   barTitleFormat: string;
   barTitleIfEmpty: string;
@@ -112,6 +127,7 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
   }[];
   locale: object;
   placeholder: string;
+  timePlaceholder: string;
   addClass: AddClass;
   addStyle: { [k: string]: any } | null;
   fieldId: string;
@@ -149,7 +165,11 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
 
   ngOnInit() {
     this.view = 'days';
+    this.timePattern = AppTimePipe.TIME_REGEXP;
+    
     this.date = new Date();
+    this.setTime(0, 0);
+
     this.setOptions();
     this.initDayNames();
     this.initYears();
@@ -188,6 +208,7 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
     this.firstCalendarDay = this.options && this.options.firstCalendarDay || 0;
     this.locale = this.options && { locale: this.options.locale } || {};
     this.placeholder = this.options && this.options.placeholder || '';
+    this.timePlaceholder = this.options && this.options.timePlaceholder || 'hh:mm';
     this.addClass = this.options && this.options.addClass || {};
     this.addStyle = this.options && this.options.addStyle || {};
     this.fieldId = this.options && this.options.fieldId || this.defaultFieldId;
@@ -204,9 +225,18 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
     this.init();
   }
 
+  setTime(hours: number | string = 0, minutes: number | string = 0): void {
+    this.timeParsed = { hours, minutes };
+
+    this.date = setHours(this.date, hours as number);
+    this.date = setMinutes(this.date, minutes as number);
+  }
+
   setDate(i: number): void {
     this.date = this.days[i].date;
+    this.setTime(this.timeParsed.hours, this.timeParsed.minutes);
     this.value = this.date;
+    
     this.init();
     this.close();
   }
@@ -348,6 +378,25 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
 
   registerOnTouched(fn: any) {
     this.onTouchedCallback = fn;
+  }
+
+  applyTime(e) {
+    console.log(e);
+  }
+
+  onTimeChange(e) {
+    this.time = e;
+
+    if (!e) {
+      return;
+    }
+
+    const parsedTime = AppTimePipe.parseTime(e) || {};
+    const { hours, minutes } = parsedTime;
+    
+    this.setTime(hours, minutes);
+
+    this.value = this.date;
   }
 
   @HostListener('document:click', ['$event']) onBlur(e: MouseEvent) {

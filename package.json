@@ -1,5 +1,5 @@
 {
-  "name": "ng2-datepicker",
+  "name": "ng2-datetimepicker",
   "version": "3.1.1",
   "main": "./dist/bundles/ng2-datepicker.umd.js",
   "module": "./dist/ng2-datepicker.es5.js",
@@ -7,16 +7,16 @@
   "typings": "./dist/ng2-datepicker.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bleenco/ng2-datepicker.git"
+    "url": "git+https://github.com/pilgin/ng2-datetimepicker.git"
   },
   "authors": [
     "Jan Kuri <jan@bleenco.com>"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bleenco/ng2-datepicker/issues"
+    "url": "https://github.com/pilgin/ng2-datetimepicker/issues"
   },
-  "homepage": "https://github.com/bleenco/ng2-datepicker#readme",
+  "homepage": "https://github.com/pilgin/ng2-datetimepicker#readme",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -42,31 +42,31 @@
     "@angular/platform-browser": "6.0.1",
     "@angular/platform-browser-dynamic": "6.0.1",
     "@angular/router": "6.0.1",
-    "@types/jasmine": "~2.8.7",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~10.0.8",
-    "bulma": "^0.7.1",
-    "codelyzer": "^4.3.0",
-    "core-js": "^2.5.6",
-    "jasmine-core": "~3.1.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~2.0.2",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "^1.4.2",
-    "karma-jasmine": "~1.1.2",
-    "karma-jasmine-html-reporter": "^1.1.0",
-    "ng-packagr": "^2.4.4",
-    "protractor": "~5.3.2",
-    "rimraf": "^2.6.2",
-    "rxjs": "^6.1.0",
-    "ts-node": "~6.0.3",
-    "tslint": "~5.10.0",
+    "@types/jasmine": "2.8.7",
+    "@types/jasminewd2": "2.0.3",
+    "@types/node": "10.0.8",
+    "bulma": "0.7.1",
+    "codelyzer": "4.3.0",
+    "core-js": "2.5.6",
+    "jasmine-core": "3.1.0",
+    "jasmine-spec-reporter": "4.2.1",
+    "karma": "2.0.2",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-coverage-istanbul-reporter": "1.4.2",
+    "karma-jasmine": "1.1.2",
+    "karma-jasmine-html-reporter": "1.1.0",
+    "ng-packagr": "2.4.4",
+    "protractor": "5.3.2",
+    "rimraf": "2.6.2",
+    "rxjs": "6.1.0",
+    "ts-node": "6.0.3",
+    "tslint": "5.10.0",
     "typescript": "2.7.2",
-    "zone.js": "^0.8.26",
-    "@angular-devkit/build-angular": "~0.6.1"
+    "zone.js": "0.8.26",
+    "@angular-devkit/build-angular": "0.6.1"
   },
   "dependencies": {
-    "date-fns": "^1.29.0",
-    "ngx-slimscroll": "^5.0.0"
+    "date-fns": "1.29.0",
+    "ngx-slimscroll": "5.0.0"
   }
 }

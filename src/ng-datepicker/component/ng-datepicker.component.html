@@ -41,6 +41,15 @@
           </g>
         </g>
       </svg>
+
+      <div class="time">
+        <i class="time__icon"></i>
+        <input class="time__input" type="text" maxlength="5"
+          placeholder="{{timePlaceholder}}"
+          [ngModel]="time | appTime" 
+          (ngModelChange)="onTimeChange($event)" name="time"/>
+      </div>
+
     </div>
     <div class="main-calendar-container" *ngIf="view === 'days'">
       <div class="main-calendar-day-names">
