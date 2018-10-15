@@ -5,7 +5,7 @@ export const TIME_SEPARATOR = ':';
 export const DISALLOWED_CHARS = /[^\d]/g;
 
 export const parseTime = (value: string = ''): any => {
-    const matches = value.match(this.TIME_REGEXP);
+    const matches = value.match(TIME_REGEXP);
 
     if (!matches) {
         return {};
