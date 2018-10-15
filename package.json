@@ -1,6 +1,6 @@
 {
   "name": "ngx-datepicker-time-inc",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "main": "./dist/bundles/ngx-datepicker-time-inc.umd.js",
   "module": "./dist/ngx-datepicker-time-inc.es5.js",
   "es2015": "./dist/ngx-datepicker-time-inc.js",
