@@ -11,7 +11,8 @@ import * as frLocale from 'date-fns/locale/fr';
 export class AppComponent {
   date: Date;
   options: DatepickerOptions = {
-    locale: enLocale
+    locale: enLocale,
+    displayFormat: 'MMM D[,] YYYY HH:mm'
   };
   constructor() {
     this.date = new Date();

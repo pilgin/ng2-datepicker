@@ -166,7 +166,7 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
   ngOnInit() {
     this.view = 'days';
     this.timePattern = TIME_REGEXP;
-    
+
     this.date = new Date();
     this.setTime(0, 0);
 
@@ -201,7 +201,7 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
     const today = new Date(); // this const was added because during my tests, I noticed that at this level this.date is undefined
     this.minYear = this.options && this.options.minYear || getYear(today) - 30;
     this.maxYear = this.options && this.options.maxYear || getYear(today) + 30;
-    this.displayFormat = this.options && this.options.displayFormat || 'MMM D[,] YYYY';
+    this.displayFormat = this.options && this.options.displayFormat || 'MMM D[,] YYYY HH:mm';
     this.barTitleFormat = this.options && this.options.barTitleFormat || 'MMMM YYYY';
     this.dayNamesFormat = this.options && this.options.dayNamesFormat || 'ddd';
     this.barTitleIfEmpty = this.options && this.options.barTitleIfEmpty || 'Click to select a date';
@@ -236,7 +236,7 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
     this.date = this.days[i].date;
     this.setTime(this.timeParsed.hours, this.timeParsed.minutes);
     this.value = this.date;
-    
+
     this.init();
     this.close();
   }
@@ -397,6 +397,8 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
     this.setTime(hours, minutes);
 
     this.value = this.date;
+
+    this.displayValue = format(this.innerValue, this.displayFormat, this.locale);
   }
 
   @HostListener('document:click', ['$event']) onBlur(e: MouseEvent) {
