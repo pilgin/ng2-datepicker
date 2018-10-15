@@ -25,7 +25,7 @@ import {
 } from 'date-fns';
 import { ISlimScrollOptions } from 'ngx-slimscroll';
 
-import { AppTimePipe } from '../pipes/time.pipe';
+import { TIME_REGEXP, parseTime } from '../pipes/time.pipe';
 
 export type AddClass = string | string[] | { [k: string]: boolean } | null;
 
@@ -165,7 +165,7 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
 
   ngOnInit() {
     this.view = 'days';
-    this.timePattern = AppTimePipe.TIME_REGEXP;
+    this.timePattern = TIME_REGEXP;
     
     this.date = new Date();
     this.setTime(0, 0);
@@ -391,9 +391,9 @@ export class NgDatepickerComponent implements ControlValueAccessor, OnInit, OnCh
       return;
     }
 
-    const parsedTime = AppTimePipe.parseTime(e) || {};
+    const parsedTime = parseTime(e) || {};
     const { hours, minutes } = parsedTime;
-    
+
     this.setTime(hours, minutes);
 
     this.value = this.date;

@@ -1,10 +1,10 @@
 {
-  "name": "ng2-datetimepicker",
-  "version": "3.1.1",
-  "main": "./dist/bundles/ng2-datepicker.umd.js",
-  "module": "./dist/ng2-datepicker.es5.js",
-  "es2015": "./dist/ng2-datepicker.js",
-  "typings": "./dist/ng2-datepicker.d.ts",
+  "name": "ngx-datepicker-time-inc",
+  "version": "3.1.2",
+  "main": "./dist/bundles/ngx-datepicker-time-inc.umd.js",
+  "module": "./dist/ngx-datepicker-time-inc.es5.js",
+  "es2015": "./dist/ngx-datepicker-time-inc.js",
+  "typings": "./dist/ngx-datepicker-time-inc.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pilgin/ng2-datetimepicker.git"

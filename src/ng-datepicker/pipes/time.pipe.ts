@@ -1,41 +1,37 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-const TIME_REGEXP = /^([01]\d|2[0-3]):?([0-5]\d)$/;
-const TIME_SEPARATOR = ':';
-const DISALLOWED_CHARS = /[^\d]/g;
+export const TIME_REGEXP = /^([01]\d|2[0-3]):?([0-5]\d)$/;
+export const TIME_SEPARATOR = ':';
+export const DISALLOWED_CHARS = /[^\d]/g;
 
-@Pipe({ name: 'appTime' })
-export class AppTimePipe implements PipeTransform {
-    static TIME_REGEXP = TIME_REGEXP;
-    static TIME_SEPARATOR = TIME_SEPARATOR;
-    static DISALLOWED_CHARS = DISALLOWED_CHARS;
+export const parseTime = (value: string = ''): any => {
+    const matches = value.match(this.TIME_REGEXP);
 
-    static parseTime(value: string = ''): any {
-        const matches = value.match(this.TIME_REGEXP);
-
-        if (!matches) {
-            return {};
-        }
-
-        const [ , hours, minutes = '' ] = matches;
-
-        return { hours, minutes };
-
+    if (!matches) {
+        return {};
     }
 
+    const [ , hours, minutes = '' ] = matches;
+
+    return { hours, minutes };
+};
+
+// @dynamic
+@Pipe({ name: 'appTime' })
+export class AppTimePipe implements PipeTransform {
     transform(value: string = ''): string {
         if (!value || typeof value !== 'string') {
             return value;
         }
 
-        const parsedTime = AppTimePipe.parseTime(value) || {};
+        const parsedTime = parseTime(value) || {};
         const { hours, minutes } = parsedTime;
 
         if (!hours || !minutes) {
             return value;
         }
 
-        return `${hours}${AppTimePipe.TIME_SEPARATOR}${minutes}`;
+        return `${hours}${TIME_SEPARATOR}${minutes}`;
     }
 
     parse(value: string = ''): any {
@@ -43,6 +39,6 @@ export class AppTimePipe implements PipeTransform {
             return value;
         }
 
-        return AppTimePipe.parseTime(value);
+        return parseTime(value);
     }
 }
