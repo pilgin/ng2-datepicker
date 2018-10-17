@@ -1,0 +1,18 @@
+<div class="time">
+    <i class="time__icon"></i>
+    <div #timeContainer class="time__container">
+      <input #hoursInput type="text" name="hours" class="time__hours-input" maxlength="2"
+        [ngModel]="hours"
+        (ngModelChange)="onHoursChange(hoursInput.value)"
+        (focus)="onHoursInputFocus(); onInputFocus()"
+        (blur)="onInputBlur()"
+        placeholder="{{hoursPlaceholder}}"/>
+      <span>:</span>
+      <input #minutesInput type="text" name="minutes" class="time__minutes-input" maxlength="2"
+        [ngModel]="minutes"
+        (ngModelChange)="onMinutesChange(minutesInput.value)"
+        (focus)="onMinutesInputFocus(); onInputFocus()"
+        (blur)="onInputBlur()"
+        placeholder="{{minutesPlaceholder}}"/>
+    </div>
+</div>
